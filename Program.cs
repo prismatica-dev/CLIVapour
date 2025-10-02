@@ -93,6 +93,10 @@ public class Program {
                 case "--exclude-skidrow":
                     SearchFilter.Add("skidrow");
                     return;
+                case "-P":
+                case "--exclude-plaza":
+                    SearchFilter.Add("plaza");
+                    return;
                 case "-a":
                 case "--all":
                     MaxDelay = 60;
@@ -164,18 +168,21 @@ public class Program {
                                     case 'E':
                                         SearchFilter.Add("empress");
                                         continue;
+                                    case 'P':
+                                        SearchFilter.Add("plaza");
+                                        continue;
                                     case 'U':
                                         SearchFilter.Add("update");
                                         continue;
                                     case 'T':
                                         SearchFilter.Add("update v");
-                                        continue; }
+                                        continue;  }
                             return; }}
                     Console.WriteLine($"{RED}Unknown argument '{Argument}'{GREY}");
                     return; }
         } catch (Exception ex) { Console.WriteLine($"{RED}Failed to parse argument '{Argument}'{GREY}"); }}
 
-    public static char[] ValidShorthands = { 'e', 's', 'q', 'v', 'a', 'f', 'R', 'C', 'S', 'E', 'U' };
+    public static char[] ValidShorthands = { 'e', 's', 'q', 'v', 'a', 'f', 'R', 'C', 'S', 'E', 'U', 'P' };
     public static async Task WaitForResults(int Target) {
         long s = DateTime.UtcNow.Ticks;
         for (int i = 0; i < MaxDelay * WaitIncrement; i++) {
@@ -224,6 +231,7 @@ public class Program {
                     $" {MAGENTA}-R, --exclude-rune      {GREY}Excludes labelled RUNE torrents from results\n" +
                     $" {MAGENTA}-C, --exclude-codex     {GREY}Excludes labelled CODEX torrents from results\n" +
                     $" {MAGENTA}-S, --exclude-skidrow   {GREY}Excludes labelled SKIDROW torrents from results\n" +
+                    $" {MAGENTA}-P, --exclude-plaza     {GREY}Excludes labelled PLAZA torrents from results\n" +
                     $" {MAGENTA}-E, --exclude-empress,   \n" +
                     $" {MAGENTA}    --exclude-mould     {GREY}Excludes labelled EMPRESS torrents from results\n" +
                     $" {MAGENTA}    --exclude=string    {GREY}Excludes results containingthe specified string {RED}(no spaces){GREY} from results\n" +
